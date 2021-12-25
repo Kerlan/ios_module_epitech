@@ -95,7 +95,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         // TODO: Get product tapped
         let product = shop.products[indexPath.row]
         // TODO: Navigate to detail view controller
-        present(DetailViewController(dependencies: dependencies, product: product), animated: true, completion: nil)
+        present(DetailViewController(dependencies: dependencies, product: product), animated: nil)
     }
 }
 
