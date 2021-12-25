@@ -24,7 +24,26 @@ class ShopModelTests: XCTestCase {
             XCTFail()
             return
         }
-XCTAssert(<#T##expression: Bool##Bool#>)
+        guard let data = try? Data(contentsOf: resource) else {
+            XCTFail()
+            return
+        }
+        guard let shopJSON = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String : Any] else {
+            XCTFail()
+            return
+        }
+        let name = shopJSON["company_name"] as? String
+        guard let products = shopJSON["products"] as? [Any] else {
+            XCTFail()
+            return
+        }
+        let nbProducts = products.count
+        let product = products[0] as? [String : Any]
+        let id = product?["id"] as? String
+        
+        XCTAssert(name == "Savon de France")
+        XCTAssert(nbProducts == 8)
+        XCTAssert(id == "aloe-vera-bar")
         // Get data from resource
         // Parse it
         // Asserts: Verify the company name, the number of products, values of the first element.
