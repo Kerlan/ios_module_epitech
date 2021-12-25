@@ -196,10 +196,10 @@ extension DetailViewController {
         }
 
         func apply(product: Product, quantity: Int) {
-            nameLabel.text = "update this" // TODO: Set to the product name
-            priceLabel.text = "update this" // TODO: use -> Int.currencyFormatted
+            nameLabel.text = product.name // TODO: Set to the product name
+            priceLabel.text = product.priceCents.currencyFormatted // TODO: use -> Int.currencyFormatted
 
-            productImageView.image = .init() // UIImage.init(named: name)
+            productImageView.image = UIImage.init(named: product.image)
 
             quantityValueLabel.text = String(quantity)
 
