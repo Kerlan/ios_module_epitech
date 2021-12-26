@@ -16,5 +16,13 @@ class APIHandlingTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
 
         // TODO: Assert
+        apiHandler.fetchShop { result in
+            switch result {
+            case .success(_):
+                XCTAssert(true)
+            case .failure(_):
+                XCTAssert(false)
+            }
+        }
     }
 }

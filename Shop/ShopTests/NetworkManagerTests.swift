@@ -22,7 +22,7 @@ class NetworkManagerTests: XCTestCase {
 
         networkManager.data(from: resource, type: Shop.self) { result in
             // Check documentation: https://docs.swift.org/swift-book/LanguageGuide/Enumerations.html
-            // TODO: Assert
+            // TODO: Assert            
             expectation.fulfill()
         }
 

@@ -16,9 +16,9 @@ class DefaultDetailPresenter: DetailPresenter {
 
     func viewDidLoad() {
         // TODO: Get quantity value from cache
-        let quantity = 0
+        let quantity = cacheManager.value(forKey: product.name, type: Int.self)
 
-        view?.apply(product: product, quantity: quantity)
+        view?.apply(product: product, quantity: quantity ?? 0)
     }
 
     func didTapAddButton() {

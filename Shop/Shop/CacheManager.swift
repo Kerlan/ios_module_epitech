@@ -13,10 +13,16 @@ protocol CacheManaging {
 class CacheManager: CacheManaging {
 
     func save<T: Codable>(_ value: T?, forKey key: String) {
-
+        UserDefaults.standard.setValue(value, forKey: key)
     }
 
     func value<T: Codable>(forKey key: String, type: T.Type) -> T? {
-        return nil
+        guard let data = UserDefaults.standard.object(forKey: key) as? Data else {
+            return nil
+        }
+        guard let object = try? JSONDecoder().decode(type, from: data) else {
+            return nil
+        }
+        return object
     }
 }
