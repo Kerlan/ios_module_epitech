@@ -8,11 +8,10 @@ class DefaultDetailPresenter: DetailPresenter {
     weak var view: DetailPresenterView?
     var product: Product
     var cacheManager: CacheManaging
-    var quantity: Int
+
     init(cacheManager: CacheManaging, product: Product) {
         self.cacheManager = cacheManager
         self.product = product
-        self.quantity = 0
     }
 
     func viewDidLoad() {
@@ -24,18 +23,15 @@ class DefaultDetailPresenter: DetailPresenter {
 
     func didTapAddButton() {
         // TODO: Update quantity value
-        //var quantity = cacheManager.value(forKey: product.name, type: Int.self) ?? 0
-        quantity += 1
-        cacheManager.save(quantity, forKey: product.name)
+        let quantity = 0
+
         view?.apply(product: product, quantity: quantity)
     }
 
     func didTapRemoveButton() {
         // TODO: Update quantity value
-        if (quantity != 0)  {
-            quantity -= 1
-        }
-        cacheManager.save(quantity, forKey: product.name)
+        let quantity = 0
+
         view?.apply(product: product, quantity: quantity)
     }
 }
