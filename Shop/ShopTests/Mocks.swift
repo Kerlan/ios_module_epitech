@@ -19,7 +19,7 @@ class MockCacheManager: CacheManaging {
     var saveCallCount = 0
     var valueCallCount = 0
 
-    func save<T: Codable>(_ value: T, forKey key: String) {
+    func save<T: Codable>(value: T, forKey key: String) {
         saveCallCount += 1
     }
 
