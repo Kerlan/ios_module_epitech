@@ -17,16 +17,16 @@ class DefaultDetailPresenter: DetailPresenter {
 
     func viewDidLoad() {
         // TODO: Get quantity value from cache
-        let quantity = cacheManager.value(forKey: product.name, type: Int.self)
+        quantity = cacheManager.value(forKey: product.name, type: Int.self) ?? 0
 
-        view?.apply(product: product, quantity: quantity ?? 0)
+        view?.apply(product: product, quantity: quantity)
     }
 
     func didTapAddButton() {
         // TODO: Update quantity value
         //var quantity = cacheManager.value(forKey: product.name, type: Int.self) ?? 0
         quantity += 1
-        cacheManager.save(quantity, forKey: product.name)
+        cacheManager.save(value: quantity, forKey: product.name)
         view?.apply(product: product, quantity: quantity)
     }
 
@@ -35,7 +35,7 @@ class DefaultDetailPresenter: DetailPresenter {
         if (quantity != 0)  {
             quantity -= 1
         }
-        cacheManager.save(quantity, forKey: product.name)
+        cacheManager.save(value: quantity, forKey: product.name)
         view?.apply(product: product, quantity: quantity)
     }
 }
