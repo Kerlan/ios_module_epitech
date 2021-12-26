@@ -23,15 +23,19 @@ class DefaultDetailPresenter: DetailPresenter {
 
     func didTapAddButton() {
         // TODO: Update quantity value
-        let quantity = 0
-
+        var quantity = cacheManager.value(forKey: product.name, type: Int.self) ?? 0
+        
+        quantity += 1
+        cacheManager.save(quantity, forKey: product.name)
         view?.apply(product: product, quantity: quantity)
     }
 
     func didTapRemoveButton() {
         // TODO: Update quantity value
-        let quantity = 0
-
+        var quantity = cacheManager.value(forKey: product.name, type: Int.self) ?? 0
+        
+        quantity -= 1
+        cacheManager.save(quantity, forKey: product.name)
         view?.apply(product: product, quantity: quantity)
     }
 }
