@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
 
         // TODO: Set title as the company name
-        title = shop?.name ?? "error"
+        title = shop?.name ?? ""
     }
 
     override func viewWillDisappear(_ animated: Bool) {

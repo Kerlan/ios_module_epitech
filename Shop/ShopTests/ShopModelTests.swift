@@ -28,22 +28,15 @@ class ShopModelTests: XCTestCase {
             XCTFail()
             return
         }
-        guard let shopJSON = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String : Any] else {
-            XCTFail()
-            return
-        }
-        let name = shopJSON["company_name"] as? String
-        guard let products = shopJSON["products"] as? [Any] else {
-            XCTFail()
-            return
-        }
-        let nbProducts = products.count
-        let product = products[0] as? [String : Any]
-        let id = product?["id"] as? String
+        let shop = try! JSONDecoder().decode(Shop.self, from: data)
         
-        XCTAssert(name == "Savon de France")
-        XCTAssert(nbProducts == 8)
-        XCTAssert(id == "aloe-vera-bar")
+        XCTAssert(shop.name == "Savon de France")
+        XCTAssert(shop.products.count == 8)
+        XCTAssert(shop.products[0].id == "aloe-vera-bar")
+        XCTAssert(shop.products[0].name == "Aloe Vera Bar")
+        XCTAssert(shop.products[0].image == "aloe-vera-bar")
+        XCTAssert(shop.products[0].priceCents == 550)
+        XCTAssert(shop.products[0].currency == "USD")
         // Get data from resource
         // Parse it
         // Asserts: Verify the company name, the number of products, values of the first element.
@@ -57,7 +50,18 @@ class ShopModelTests: XCTestCase {
             XCTFail()
             return
         }
-
+        
+        guard let data = try? Data(contentsOf: resource) else {
+            XCTFail()
+            return
+        }
+        let shop = try? JSONDecoder().decode(Shop.self, from: data)
+        
+        if shop == nil {
+            XCTAssert(true)
+        } else {
+            XCTFail()
+        }
         // Get data from resource
         // Parse it
         // Verify that decoding is failing and returning nil

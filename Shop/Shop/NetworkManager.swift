@@ -40,14 +40,11 @@ public class NetworkManager: NetworkManaging {
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
-                    completion(.failure(.error(error!)))
-                    return
-                }
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                     completion(.failure(.noData))
                     return
                 }
-                completion(.success(data as! T))
+                let shop = try! JSONDecoder().decode(type, from: data)
+                completion(.success(shop))
             }
         }
         task.resume()
